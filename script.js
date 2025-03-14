@@ -1,9 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Первый плеер (Интенсивность)
     const intensitySlider = document.getElementById("intensitySlider");
-    const audioLayer1 = document.getElementById("audioLayer1"); // Базовый фон
-    const audioLayer2 = document.getElementById("audioLayer2"); // Средняя интенсивность
-    const audioLayer3 = document.getElementById("audioLayer3"); // Экшен
+    const audioLayer1 = document.getElementById("audioLayer1");
+    const audioLayer2 = document.getElementById("audioLayer2");
+    const audioLayer3 = document.getElementById("audioLayer3");
+
+    // Проверяем, что все аудиофайлы загружены
+    if (!audioLayer1 || !audioLayer2 || !audioLayer3) {
+        console.error("Ошибка: один из аудиофайлов не найден!");
+        return;
+    }
 
     function updateIntensity() {
         let value = parseFloat(intensitySlider.value);
@@ -31,6 +37,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const happyLayer = document.getElementById("happyLayer");
     const sadLayer = document.getElementById("sadLayer");
 
+    // Проверяем, что аудиофайлы второго плеера загружены
+    if (!happyLayer || !sadLayer) {
+        console.error("Ошибка: файлы happy.mp3 или sad.mp3 не загружены!");
+        return;
+    }
+
     function updateEmotion() {
         let value = parseFloat(emotionSlider.value);
         happyLayer.volume = 1 - value; // Весёлая музыка плавно уменьшается
@@ -48,6 +60,11 @@ document.addEventListener("DOMContentLoaded", function () {
         happyLayer.pause();
         sadLayer.pause();
     };
+
+    // Устанавливаем громкость в начальные значения (важно!)
+    updateIntensity();
+    updateEmotion();
+});
 
     // Устанавливаем громкость в начальные значения (важно!)
     updateIntensity();
