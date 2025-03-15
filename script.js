@@ -5,9 +5,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const audioLayer2 = document.getElementById("audioLayer2");
     const audioLayer3 = document.getElementById("audioLayer3");
 
-    // Проверяем, что все аудиофайлы загружены
+    // Проверяем, что слайдер существует
+    if (!intensitySlider) {
+        console.error("Ошибка: Ползунок интенсивности не найден!");
+        return;
+    }
+
+    // Проверяем, что аудиофайлы загружены
     if (!audioLayer1 || !audioLayer2 || !audioLayer3) {
-        console.error("Ошибка: один из аудиофайлов не найден!");
+        console.error("Ошибка: Один из аудиофайлов для интенсивности не найден!");
         return;
     }
 
@@ -21,9 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
     intensitySlider.addEventListener("input", updateIntensity);
 
     window.playMusic = function() {
-        audioLayer1.play();
-        audioLayer2.play();
-        audioLayer3.play();
+        try {
+            if (audioLayer1.readyState >= 2) audioLayer1.play();
+            if (audioLayer2.readyState >= 2) audioLayer2.play();
+            if (audioLayer3.readyState >= 2) audioLayer3.play();
+        } catch (err) {
+            console.error("Ошибка воспроизведения: ", err);
+        }
     };
 
     window.pauseMusic = function() {
@@ -37,9 +47,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const happyLayer = document.getElementById("happyLayer");
     const sadLayer = document.getElementById("sadLayer");
 
+    // Проверяем, что слайдер существует
+    if (!emotionSlider) {
+        console.error("Ошибка: Ползунок эмоций не найден!");
+        return;
+    }
+
     // Проверяем, что аудиофайлы второго плеера загружены
     if (!happyLayer || !sadLayer) {
-        console.error("Ошибка: файлы happy.mp3 или sad.mp3 не загружены!");
+        console.error("Ошибка: Файлы happy.mp3 или sad.mp3 не загружены!");
         return;
     }
 
@@ -52,8 +68,12 @@ document.addEventListener("DOMContentLoaded", function () {
     emotionSlider.addEventListener("input", updateEmotion);
 
     window.playEmotionMusic = function() {
-        happyLayer.play();
-        sadLayer.play();
+        try {
+            if (happyLayer.readyState >= 2) happyLayer.play();
+            if (sadLayer.readyState >= 2) sadLayer.play();
+        } catch (err) {
+            console.error("Ошибка воспроизведения эмоций: ", err);
+        }
     };
 
     window.pauseEmotionMusic = function() {
@@ -61,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sadLayer.pause();
     };
 
-    // Устанавливаем громкость в начальные значения (важно!)
+    // Устанавливаем громкость в начальные значения
     updateIntensity();
     updateEmotion();
 });
