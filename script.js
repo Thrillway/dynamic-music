@@ -65,8 +65,3 @@ document.addEventListener("DOMContentLoaded", function () {
     updateIntensity();
     updateEmotion();
 });
-
-    // Устанавливаем громкость в начальные значения (важно!)
-    updateIntensity();
-    updateEmotion();
-});
