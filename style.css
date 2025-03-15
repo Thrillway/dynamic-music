@@ -1,15 +1,32 @@
+/* Подключение шрифта SF Pro Display */
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('https://fonts.cdnfonts.com/sf-pro-display.woff2') format('woff2'),
+         url('https://fonts.cdnfonts.com/sf-pro-display.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Основные стили */
 body {
-    font-family: 'SF Pro Display', sans-serif;
+    font-family: 'SF Pro Display', system-ui, sans-serif;
     text-align: center;
     padding: 20px;
     background: linear-gradient(90deg, #0080ff, #ff0040);
     transition: background 1s ease-in-out;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Заголовки */
 h1, h2 {
     color: white;
 }
 
+/* Блок плеера */
 .player {
     background: rgba(255, 255, 255, 0.2);
     padding: 15px;
@@ -18,25 +35,29 @@ h1, h2 {
     width: 80%;
     max-width: 400px;
     backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Ползунок (вернулся к старому дизайну) */
 input[type='range'] {
     width: 80%;
     margin: 10px 0;
     -webkit-appearance: none;
-    appearance: none; /* Standard property for compatibility */
+    appearance: none;
     height: 10px;
     background: linear-gradient(90deg, blue, red);
     border-radius: 5px;
     transition: background 0.5s;
 }
 
+/* Контейнер для кнопок */
 .audio-controls {
     display: flex;
     justify-content: center;
     gap: 10px;
 }
 
+/* Стили кнопок */
 button {
     background: rgba(255, 255, 255, 0.3);
     border: none;
@@ -44,9 +65,17 @@ button {
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Эффект при наведении */
 button:hover {
     background: rgba(255, 255, 255, 0.5);
+}
+
+/* Эффект нажатия */
+button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
